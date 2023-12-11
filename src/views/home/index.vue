@@ -48,7 +48,7 @@
     </el-row>
 </template>
 <script>
-
+    import { getMenu } from '../../../api/data.js';
     export default {
         name: 'homePage',
         data() {
@@ -133,12 +133,8 @@
             }
         },
         mounted() {
-            this.$http.get('user?ID=1234')
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error){
-                console.log(error);
+            getMenu().then(res => {
+                console.log(res);
             })
         }
     }
