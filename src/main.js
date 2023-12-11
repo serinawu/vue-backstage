@@ -7,6 +7,7 @@ import './assets/less/index.less';
 import router from '../router';
 import store from './store/index.js'
 import axios from 'axios';
+import '../src/api/mock.js';
 import App from './App.vue';
 
 const app = createApp(App);
