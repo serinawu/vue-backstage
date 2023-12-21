@@ -39,9 +39,13 @@
                     </div>
                 </el-card>
             </div>
-            <el-card style="height: 280px"></el-card>
+            <el-card style="height: 280px">
+                <div style="width: 100%; height: 280px; margin: 0 auto;" ref="echarts"></div>
+            </el-card>
             <div class="graph">
-                <el-card style="width: 48%; height: 260px"></el-card>
+                <el-card style="width: 48%; height: 260px">
+                    <div style="height: 240px;" ref="userEcharts"></div>
+                </el-card>
                 <el-card style="width: 48%; height: 260px"></el-card>
             </div>
         </el-col>
@@ -49,6 +53,7 @@
 </template>
 <script>
     import { getData } from '../../api/data.js';
+    import * as echarts from 'echarts';
     export default {
         name: 'homePage',
         data() {
@@ -134,11 +139,93 @@
         },
         mounted() {
             getData().then(res => {
+                const { code, data } = res.data;
+                if (code === 20000) {
+                    this.tableData = data.tableData;
+                    const order = data.orderData;
+                    const xData = order.date;
+                    const keyArray =  Object.keys(order.data[0]);
+                    const series = [];
+                    keyArray.forEach(key => {
+                        series.push({
+                            name: key,
+                            data: order.data.map(item => item[key]),
+                            type: 'line'
+                        })
+                    })
+                    const option = {
+                        xAxis: {
+                            data: xData,
+                        },
+                        yAxis: {},
+                        legend: {
+                            data: keyArray
+                        },
+                        series
+                    }
+
+                    const E = echarts.init(this.$refs.echarts);
+                    E.setOption(option);
+
+                    //用戶圖
+                    const userOption = {
+                        legend: {
+                            //圖例文字顏色
+                            textStyle: {
+                                color: "#333",
+                            },
+                        },
+                        grid: {
+                            left: "20%",
+                        },
+                        //提示框
+                        tooltip: {
+                            trigger: "axis",
+                        },
+                        xAxis: {
+                            type: "category", //類軸
+                            data: data.userData.map(item => item.date),
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#17b3a3",
+                                },
+                            },
+                            axisLabel: {
+                                interval: 0,
+                                color: '#333',
+                            },
+                        },
+                        yAxis: [
+                            {
+                                type: "value",
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#17b3a3',
+                                    },
+                                },
+                            },
+                        ],
+                        color: ["#2ec7c9", "#b6a2de"],
+                        series: [
+                            {
+                                name: '新增用戶',
+                                data: data.userData.map(item => item.new),
+                                type: 'bar'
+                            },
+                            {
+                                name: '活躍用戶',
+                                data: data.userData.map(item => item.active),
+                                type: 'bar'
+                            }
+                        ],
+                    }
+                    const U = echarts.init(this.$refs.userEcharts);
+                    U.setOption(userOption);
+                }
                 console.log(res);
             })
         }
     }
-
 </script>
 
 <style lang="less" scoped>
