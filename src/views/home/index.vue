@@ -46,7 +46,9 @@
                 <el-card style="width: 48%; height: 260px">
                     <div style="height: 240px;" ref="userEcharts"></div>
                 </el-card>
-                <el-card style="width: 48%; height: 260px"></el-card>
+                <el-card style="width: 48%; height: 260px">
+                    <div style="height: 240px;" ref="videoEcharts"></div>
+                </el-card>
             </div>
         </el-col>
     </el-row>
@@ -221,6 +223,30 @@
                     }
                     const U = echarts.init(this.$refs.userEcharts);
                     U.setOption(userOption);
+
+                    //圓餅圖
+                    const videoOption = {
+                        tooltip: {
+                            trigger: 'item',
+                        },
+                        color: [
+                            "#0f78f4",
+                            "#dd536b",
+                            "#9462e5",
+                            "#a6a6a6",
+                            "#e1bb22",
+                            "#39c362",
+                            "#3ed1cf"
+                        ],
+                        series: [
+                            {
+                                data: data.videoData,
+                                type: "pie"
+                            }
+                        ],
+                    }
+                    const V = echarts.init(this.$refs.videoEcharts);
+                    V.setOption(videoOption);
                 }
                 console.log(res);
             })
