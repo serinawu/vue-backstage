@@ -22,7 +22,7 @@
        <span>其他</span>
      </template>
      <el-menu-item-group>
-       <el-menu-item v-for="childItem in item.children" :key="childItem.path" :index="childItem.path">
+       <el-menu-item v-for="childItem in item.children" :key="childItem.path" :index="childItem.path" @click="clickMenu(childItem)">
          <el-icon>
            <component :is="childItem.icon"></component>
          </el-icon>
@@ -46,11 +46,11 @@ export default {
                     url: 'Home/Home'
                 },
                 {
-                    path: '/mail',
-                    name: 'mail',
+                    path: '/mall',
+                    name: 'mall',
                     label: '商品管理',
                     icon: 'video-play',
-                    url: 'MailManage/MailManage'
+                    url: 'MallManage/MallManage'
                 },
                 {
                     path: '/user',
@@ -87,6 +87,7 @@ export default {
           this.$router.push({
             name: item.name,
           })
+          this.$store.commit('selectMenu', 'item')
         },
         getIconComponent (iconName) {
 
