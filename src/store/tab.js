@@ -3,7 +3,7 @@ export default {
         isCollapsed: false,
         tabsList: [
             {
-                path: '/',
+                path: '/home',
                 name: 'home',
                 label: '首頁',
                 icon: 'HomeFilled'
@@ -16,15 +16,17 @@ export default {
             state.isCollapsed = !state.isCollapsed;
         },
         selectMenu(state, val) {
-            if(val.name !== 'home') {
-                state.currentMenu = val
-                const result = state.tabsList.findIndex(item => item.name === val.name)
-                if (result !== -1) {
-                    state.tabsList.push(val)
-                }
+            state.currentMenu = val;
+            const result = state.tabsList.findIndex(item => item.name === val.name);
+            if (result === -1) {
+                state.tabsList.push(val);
             } else {
                 state.currentMenu = null
             }
+        },
+        closeTag(state, val) {
+            const result = state.tabsList.findIndex(item => item.name === val.name );
+            state.tabsList.splice(result, 1);
         }
     }
 }
