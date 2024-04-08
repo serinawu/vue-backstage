@@ -10,7 +10,6 @@
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item 
                 v-for="item in tags" 
-                :index="item.path" 
                 :key="item.path"
                 :to="{ path: item.path }">
                 {{ item.label }}

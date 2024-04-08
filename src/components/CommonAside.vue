@@ -60,6 +60,7 @@ export default {
                     url: 'UserManage/UserManage'
                 },
                 {
+                    path: '/other',
                     label: '其他',
                     icon: 'location',
                     children: [
