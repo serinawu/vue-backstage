@@ -12,6 +12,8 @@ if (process.env.NODE_ENV === 'development') {
     // 模擬POST 請求
     Mock.mock(/user\/getUser/, 'get', userApi.getUserList);
     Mock.mock(/user\/del/, 'post', userApi.deleteUser);
+
+    Mock.mock(/permission\/getMenu/, 'post')
   }
 
   

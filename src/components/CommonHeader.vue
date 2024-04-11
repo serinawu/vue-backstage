@@ -23,7 +23,7 @@
                 </span>
                 <el-dropdown-menu>
                     <el-dropdown-item command="a">個人中心</el-dropdown-item>
-                    <el-dropdown-item command="b">登出</el-dropdown-item>
+                    <el-dropdown-item command="b" @click="logOut">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -44,6 +44,11 @@
             },
             handleMenu() {
                 this.$store.commit('collapseMenu');
+            },
+            logOut() {
+                this.$store.commit('clearToken')
+                this.$store.commit('clearMenu')
+                this.$router.push('/login')
             }
         },
         computed: {

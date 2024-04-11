@@ -37,51 +37,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 export default {
     data(){
         return {
-            menu: [
-                {
-                    path: '/home',
-                    name: 'home',
-                    label: '首頁',
-                    icon: 'HomeFilled',
-                    url: 'Home/Home'
-                },
-                {
-                    path: '/mall',
-                    name: 'mall',
-                    label: '商品管理',
-                    icon: 'video-play',
-                    url: 'MallManage/MallManage'
-                },
-                {
-                    path: '/user',
-                    name: 'user',
-                    label: '用戶管理',
-                    icon: 'user',
-                    url: 'UserManage/UserManage'
-                },
-                {
-                    path: '/other',
-                    label: '其他',
-                    icon: 'location',
-                    children: [
-                        {
-                            path: '/page1',
-                            name: 'page1',
-                            label: '頁面1',
-                            icon: 'Setting',
-                            url: 'Other/PageOne'
-                        },
-                        {
-                            path: '/page2',
-                            name: 'page2',
-                            label: '頁面2',
-                            icon: 'Setting',
-                            url: 'Other/PageTwo'
-                        }
-                    ]
-                }
-              ]
-            }
+            menu: []
+          }
         },
     methods: {
         clickMenu(item) {
@@ -93,11 +50,14 @@ export default {
         }
     },
     computed: {
+        asyncMenu() {
+          return this.$store.state.tab.menu || [];
+        },
         filterMenu() {
-            return this.menu.filter(item => !item.children);
+            return this.asyncMenu.filter(item => !item.children);
         },
         filterMenu_withChildren() {
-            return this.menu.filter(item => item.children);
+            return this.asyncMenu.filter(item => item.children);
         },
         isCollapsed() {
           return this.$store.state.tab.isCollapsed;
