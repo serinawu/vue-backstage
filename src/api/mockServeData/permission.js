@@ -61,11 +61,11 @@ export default {
                     data: {
                         menu: [
                             {
-                                path: 'home',
-                                name: 'home',
-                                label: '首頁',
-                                icon: 'HomeFilled',
-                                url: 'home/index'
+                                path: 'home', //配置動態Router：用戶網址欄輸入的路徑
+                                name: 'home', //路由名稱，用於<router-link :to"{name: home}"></router-link>
+                                label: '首頁', //menu項顯示的文字
+                                icon: 'HomeFilled', //顯示相對element-ul名稱的icon
+                                url: 'home/index' // menu項相對應的組件路徑，用於動態導入=>addMenu
                             },
                             {
                                 path: 'mall',

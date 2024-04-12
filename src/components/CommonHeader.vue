@@ -17,14 +17,16 @@
             </el-breadcrumb>
         </div>
         <div class="r-content">
-            <el-dropdown @command="handleCommand" trigger="click" size="mini">
+            <el-dropdown @command="handleCommand">
                 <span class="user el-dropdown-link">
                     <img :src="userImg">
                 </span>
-                <el-dropdown-menu>
-                    <el-dropdown-item command="a">個人中心</el-dropdown-item>
-                    <el-dropdown-item command="b" @click="logOut">登出</el-dropdown-item>
-                </el-dropdown-menu>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                        <el-dropdown-item command="a">個人中心</el-dropdown-item>
+                        <el-dropdown-item command="b" @click="logOut">登出</el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
             </el-dropdown>
         </div>
     </header>
@@ -39,16 +41,17 @@
             }
         },
         methods: {
-            handleCommand(command) {
-                this.$message('click on item' + command);
-            },
             handleMenu() {
                 this.$store.commit('collapseMenu');
             },
+            handleCommand() {
+                
+            },
             logOut() {
-                this.$store.commit('clearToken')
-                this.$store.commit('clearMenu')
-                this.$router.push('/login')
+                this.$store.commit('clearToken');
+                this.$store.commit('clearMenu');
+                this.$router.push('/login');
+                this.$message.success('成功登出！');
             }
         },
         computed: {
