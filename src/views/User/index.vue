@@ -3,8 +3,7 @@
         <el-dialog
         title="提示"
         v-model:visible="dialogVisible"
-        width="30%"
-        :before-close="handleClose">
+        width="30%">
         <span>这是一段信息</span>
         <span class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -12,7 +11,7 @@
         </span>
         </el-dialog>
         <div class="manage-header">
-            <el-button type="primary" @click="dialogVisible = true">新增</el-button>
+            <el-button type="primary" plain @click="dialogTableVisible = true">新增</el-button>
             <common-form
             :formLabel="formLabel"
             :form="searchForm"
@@ -22,7 +21,6 @@
                 <el-button type="primary" @click="getList(searchForm.keyword)">搜索</el-button>
             </common-form>
         </div>
-        
         <common-table
         :tableData="tableData"
         :tableLabel="tableLabel"
@@ -170,9 +168,12 @@ export default {
                 type: "warning"
             }).then(() => {
                 const id = row.id;
-                this.$http.get("user/del", {
-                    params: { id }
-                })
+                return this.$http.post("user/del", { id: id });
+            }).then(() => {
+                this.getList();
+                this.$message.success('用戶已刪除');
+            }).catch(err => {
+                console.error("刪除操作失敗", err);
             })
         },
         getList(name = ''){
