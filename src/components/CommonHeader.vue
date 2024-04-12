@@ -72,9 +72,24 @@ header {
     display: flex;
     align-items: center;
 
-    .el-button {
+    ::v-deep button {
         margin-right: 20px;
+        cursor: pointer;
     }
+
+    ::v-deep .el-breadcrumb__inner {
+        color: #fff;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+            color: #409eff;
+        }
+        
+        &.is-link {
+            cursor: pointer;
+        }
+    } 
 }
 .r-content {
     .user {
