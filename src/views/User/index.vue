@@ -2,16 +2,57 @@
     <div class="manage">
         <el-dialog
         title="提示"
-        v-model:visible="dialogVisible"
-        width="30%">
-        <span>这是一段信息</span>
-        <span class="dialog-footer">
+        v-model="dialogVisible"
+        width="40%"
+        >
+        <template v-if="operateType === 'add'">
+            <!-- 新增用户的表单 -->
+            <el-form :model="form" :rules="rules" ref="addForm" :inline="true">
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="form.name"></el-input>
+                </el-form-item>
+                <el-form-item label="性別" prop="sex">
+                    <el-input v-model="form.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="年龄" prop="age">
+                    <el-input v-model="form.age"></el-input>
+                </el-form-item>
+                <el-form-item label="出生日期" prop="birth">
+                    <el-date-picker v-model="form.birth"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="地址" prop="addr">
+                    <el-input v-model="form.addr"></el-input>
+                </el-form-item>
+            </el-form>
+        </template>
+        <template v-else-if="operateType === 'edit'">
+            <!-- 编辑用户的表单 -->
+            <el-form :model="operateForm" ref="editForm" :inline="true">
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="operateForm.name"></el-input>
+                </el-form-item>
+                <el-form-item label="性別" prop="sex">
+                    <el-input v-model="operateForm.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="年龄" prop="age">
+                    <el-input v-model="operateForm.age"></el-input>
+                </el-form-item>
+                <el-form-item label="出生日期" prop="birth">
+                    <el-date-picker v-model="operateForm.birth"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="地址" prop="addr">
+                    <el-input v-model="operateForm.addr"></el-input>
+                </el-form-item>
+            </el-form>
+        </template>
+        <span v-else>这是一段信息</span>
+        <template #footer>
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
+            <el-button type="primary" @click="dialogVisible = false, confirm()">确 定</el-button>
+        </template>
         </el-dialog>
         <div class="manage-header">
-            <el-button type="primary" plain @click="dialogTableVisible = true">新增</el-button>
+            <el-button type="primary" @click="dialogVisible = true, confirm">新增</el-button>
             <common-form
             :formLabel="formLabel"
             :form="searchForm"
@@ -44,50 +85,27 @@ export default {
     data() {
         return {
             dialogVisible: false,
-            operateType: 'add',
-            operateFormLabel: [
-                {
-                    model: 'name',
-                    label: '姓名',
-                    type: 'input'
-                },
-                {
-                    model: 'age',
-                    label: '年齡',
-                    type: 'input'
-                }, 
-                {
-                    model: 'sex',
-                    label: '性別',
-                    type: 'select',
-                    opts: [
-                        {
-                            label: '男',
-                            value: 1
-                        },
-                        {
-                            label: '女',
-                            value: 2
-                        }
-                    ]
-                },
-                {
-                    model: 'birth',
-                    label: '出生日期',
-                    type: 'date'
-                },
-                {
-                    model: 'add',
-                    label: '地址',
-                    type: 'input'
-                }
-            ],
+            operateType: '',
+            form: {
+                name: '',
+                birth: '',
+                age: '',
+                sex: '',
+                addr: '',
+            },
             operateForm: {
                 name: '',
-                addr: '',
-                age: '',
                 birth: '',
-                sex: ''
+                age: '',
+                sex: '',
+                addr: '',
+            },
+            rules: {
+                name: [{required: true, message: "請輸入姓名"}],
+                age: [{required: true, message: "請輸入年齡"}],
+                sex: [{required: true, message: "請選擇性別"}],
+                birth: [{required: true, message: "請選擇出生日期"}],
+                addr: [{required: true, message: "請輸入地址"}],
             },
             formLabel: [
                 {
@@ -136,39 +154,31 @@ export default {
         };
     },
     methods: {
-        handleClose(done) {
-            done();
+        handleClose() {
+            //彈窗關閉的時候清空表單
+            this.$refs.addForm && this.$refs.addForm.resetFields();
+            this.$refs.editForm && this.$refs.editForm.resetFields();
+            this.dialogVisible = false;
         },
-        confirm() {
-            if (this.operateType === 'edit'){
-                this.$http.post('/user/edit', this.operateForm).then(res => {
-                    console.log(res);
-                    this.dialogVisible = false;
-                    this.getList();
-                })
-            } else {
-                this.$http.post('/user/add', this.operateForm).then(res => {
-                    console.log(res);
-                    this.dialogVisible = false;
-                    this.getList();
-                })
-            }
+        cancel() {
+            this.handleClose();
+            this.$message('取消操作');
         },
         addUser() {
-            this.dialogVisible= true;
-            this.operateType='add'
-            this.operateForm = {
+            this.operateType = 'add';
+            this.form = {
                 name: '',
-                addr: '',
                 age: '',
+                sex: '',
                 birth: '',
-                sex: ''
-            }
+                addr: '',
+            };
+            this.dialogVisible = true;
         },
         editUser(row){
-            this.operateForm = 'edit';
-            this.dialogVisible = true; //dialogVisible
-            this.operateForm = row;
+            this.operateType = 'edit';
+            this.operateForm = Object.assign({}, row);
+            this.dialogVisible = true;
         },
         delUser (row){
             this.$confirm("此操作將永久刪除該資料，是否繼續？", "提示", {
@@ -183,9 +193,8 @@ export default {
                 this.$message.success('用戶已刪除');
             }).catch(err => {
                 console.log("刪除操作取消", err);
-                this.$message('取消刪除');
-            })
-        },
+                
+            }) },
         getList(name = ''){
             console.log('Search keyword:', name);
             this.config.loading = true;
@@ -202,7 +211,28 @@ export default {
                 this.config.total = res.count;
                 this.config.loading = false;
             });
-        }
+        },
+        confirm() { //提交表單判斷是哪種操作
+            let formToValidate = this.operateType === 'edit' ? this.$refs.editForm : this.$refs.addForm;
+            if (formToValidate) {
+                formToValidate.validate((valid) => {
+                    if (valid) {
+                        const url = this.operateType === 'edit' ? '/user/edit' : '/user/add';
+                        const data = this.operateType === 'edit' ? this.operateForm : this.form;
+                        this.$http.post(url, data)
+                            .then(() => {
+                                this.dialogVisible = false;
+                                this.getList();
+                                this.$message.success('操作成功');
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                this.$message.error('操作失敗');
+                            });
+                    }
+                });
+            }
+        },
     },
     created() {
         this.getList();
