@@ -22,10 +22,10 @@ for (let i = 0; i < count; i ++) {
         Mock.mock({
             id: Mock.Random.guid(),
             name: Mock.Random.cname(),
-            addr: Mock.mock('@country(true)'),
-            'age|18-60':1,
+            sex: Mock.Random.integer(0, 1),
             birth: Mock.Random.date(),
-            sex: Mock.Random.integer(0, 1)
+            'age|18-60':1,
+            addr: Mock.mock('@county(true)'),
         })
     )
 }
@@ -66,10 +66,10 @@ export default {
         List.unshift({
             id: Mock.Random.guid(),
             name: name,
-            addr: addr,
-            age: age,
+            sex: sex,
             birth: birth,
-            sex: sex
+            age: age,
+            addr: addr,
         })
         return {
             code: 20000,

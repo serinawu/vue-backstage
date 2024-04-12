@@ -102,12 +102,17 @@ export default {
             tableData: [],
             tableLabel: [
                 {
+                    prop: "id",
+                    label: "id",
+                    width: 300
+                },
+                {
                     prop: "name",
                     label: "姓名"
                 },
                 {
-                    prop: "age",
-                    label: "年齡"
+                    prop: "sex",
+                    label: "性別"
                 },
                 {
                     prop: "birth",
@@ -115,9 +120,13 @@ export default {
                     width: 200
                 },
                 {
+                    prop: "age",
+                    label: "年齡"
+                },
+                {
                     prop: "addr",
                     label: "地址",
-                    width: 320
+                    width: 400
                 }
             ],
             config: {
@@ -173,7 +182,8 @@ export default {
                 this.getList();
                 this.$message.success('用戶已刪除');
             }).catch(err => {
-                console.error("刪除操作失敗", err);
+                console.log("刪除操作取消", err);
+                this.$message('取消刪除');
             })
         },
         getList(name = ''){
@@ -186,7 +196,7 @@ export default {
             }).then(({data: res}) => {
                 console.log(res, 'res');
                 this.tableData = res.list.map(item => {
-                    item.sexLabel = item.sex === 0 ? "女": "男"
+                    item.sex = item.sex === 0 ? "女": "男"
                     return item 
                 })
                 this.config.total = res.count;

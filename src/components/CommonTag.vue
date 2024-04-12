@@ -59,7 +59,6 @@ import { mapState, mapMutations } from 'vuex';
 </script>
 <style lang="less" scoped>
     .tabs {
-        width: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
