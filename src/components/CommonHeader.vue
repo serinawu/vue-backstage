@@ -72,12 +72,12 @@ header {
     display: flex;
     align-items: center;
 
-    ::v-deep button {
+    :deep button {
         margin-right: 20px;
         cursor: pointer;
     }
 
-    ::v-deep .el-breadcrumb__inner {
+    :deep .el-breadcrumb__inner {
         color: #fff;
         cursor: pointer;
 
