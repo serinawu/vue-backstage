@@ -46,6 +46,9 @@
     },
     "rules": {}
   },
+  "engines": {
+    "node": "20.12.2"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
