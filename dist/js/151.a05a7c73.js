@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue_backstage"]=self["webpackChunkvue_backstage"]||[]).push([[151],{5151:function(e,n,a){a.r(n),a.d(n,{default:function(){return f}});var u=a(3396);function r(e,n,a,r,t,c){return(0,u.wg)(),(0,u.iD)("div",null," 我是PageOne頁面 ")}var t={name:"PageOne",data(){return{}}},c=a(89);const s=(0,c.Z)(t,[["render",r]]);var f=s}}]);
-//# sourceMappingURL=151.a05a7c73.js.map
