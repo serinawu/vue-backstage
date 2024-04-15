@@ -72,12 +72,12 @@ header {
     display: flex;
     align-items: center;
 
-    :deep button {
+    :deep(button) {
         margin-right: 20px;
         cursor: pointer;
     }
 
-    :deep .el-breadcrumb__inner {
+    :deep(.el-breadcrumb__inner) {
         color: #fff;
         cursor: pointer;
 
