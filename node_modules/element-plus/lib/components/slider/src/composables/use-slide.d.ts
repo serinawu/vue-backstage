@@ -10,9 +10,9 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
         $: import("vue").ComponentInternalInstance;
         $data: {};
         $props: Partial<{
+            readonly vertical: boolean;
             readonly modelValue: number;
             readonly placement: import("element-plus/es/utils").EpPropMergeType<StringConstructor, import("@popperjs/core").Placement, unknown>;
-            readonly vertical: boolean;
         }> & Omit<Readonly<import("vue").ExtractPropTypes<{
             readonly modelValue: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 0, boolean>;
             readonly vertical: BooleanConstructor;
@@ -20,7 +20,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
             readonly placement: import("element-plus/es/utils").EpPropFinalized<StringConstructor, import("@popperjs/core").Placement, unknown, "top", boolean>;
         }>> & {
             "onUpdate:modelValue"?: ((value: number) => any) | undefined;
-        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "modelValue" | "placement" | "vertical">;
+        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "vertical" | "modelValue" | "placement">;
         $attrs: {
             [x: string]: unknown;
         };
@@ -2345,7 +2345,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             onMouseleave?: ((evt: MouseEvent) => any) | undefined;
                             onMouseenter?: ((evt: MouseEvent) => any) | undefined;
                         }>>;
-                        focusStartRef: Ref<HTMLElement | "first" | "container" | undefined>;
+                        focusStartRef: Ref<HTMLElement | "container" | "first" | undefined>;
                         trapped: Ref<boolean>;
                         onFocusAfterReleased: (event: CustomEvent<any>) => void;
                         onFocusAfterTrapped: () => void;
@@ -2407,7 +2407,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             trapped: BooleanConstructor;
                             focusTrapEl: import("vue").PropType<HTMLElement>;
                             focusStartEl: {
-                                type: import("vue").PropType<HTMLElement | "first" | "container">;
+                                type: import("vue").PropType<HTMLElement | "container" | "first">;
                                 default: string;
                             };
                         }, {
@@ -2417,7 +2417,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             trapped: BooleanConstructor;
                             focusTrapEl: import("vue").PropType<HTMLElement>;
                             focusStartEl: {
-                                type: import("vue").PropType<HTMLElement | "first" | "container">;
+                                type: import("vue").PropType<HTMLElement | "container" | "first">;
                                 default: string;
                             };
                         }>> & {
@@ -2430,7 +2430,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         }, {
                             trapped: boolean;
                             loop: boolean;
-                            focusStartEl: HTMLElement | "first" | "container";
+                            focusStartEl: HTMLElement | "container" | "first";
                         }>;
                     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
                         mouseenter: (evt: MouseEvent) => boolean;
@@ -3354,9 +3354,9 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
             "update:modelValue": (value: number) => boolean;
         }, string, {
+            readonly vertical: boolean;
             readonly modelValue: number;
             readonly placement: import("element-plus/es/utils").EpPropMergeType<StringConstructor, import("@popperjs/core").Placement, unknown>;
-            readonly vertical: boolean;
         }> & {
             beforeCreate?: ((() => void) | (() => void)[]) | undefined;
             created?: ((() => void) | (() => void)[]) | undefined;
@@ -5688,7 +5688,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         onMouseleave?: ((evt: MouseEvent) => any) | undefined;
                         onMouseenter?: ((evt: MouseEvent) => any) | undefined;
                     }>>;
-                    focusStartRef: Ref<HTMLElement | "first" | "container" | undefined>;
+                    focusStartRef: Ref<HTMLElement | "container" | "first" | undefined>;
                     trapped: Ref<boolean>;
                     onFocusAfterReleased: (event: CustomEvent<any>) => void;
                     onFocusAfterTrapped: () => void;
@@ -5750,7 +5750,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         trapped: BooleanConstructor;
                         focusTrapEl: import("vue").PropType<HTMLElement>;
                         focusStartEl: {
-                            type: import("vue").PropType<HTMLElement | "first" | "container">;
+                            type: import("vue").PropType<HTMLElement | "container" | "first">;
                             default: string;
                         };
                     }, {
@@ -5760,7 +5760,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         trapped: BooleanConstructor;
                         focusTrapEl: import("vue").PropType<HTMLElement>;
                         focusStartEl: {
-                            type: import("vue").PropType<HTMLElement | "first" | "container">;
+                            type: import("vue").PropType<HTMLElement | "container" | "first">;
                             default: string;
                         };
                     }>> & {
@@ -5773,7 +5773,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                     }, {
                         trapped: boolean;
                         loop: boolean;
-                        focusStartEl: HTMLElement | "first" | "container";
+                        focusStartEl: HTMLElement | "container" | "first";
                     }>;
                 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
                     mouseenter: (evt: MouseEvent) => boolean;
@@ -6699,9 +6699,9 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
         $: import("vue").ComponentInternalInstance;
         $data: {};
         $props: Partial<{
+            readonly vertical: boolean;
             readonly modelValue: number;
             readonly placement: import("element-plus/es/utils").EpPropMergeType<StringConstructor, import("@popperjs/core").Placement, unknown>;
-            readonly vertical: boolean;
         }> & Omit<Readonly<import("vue").ExtractPropTypes<{
             readonly modelValue: import("element-plus/es/utils").EpPropFinalized<NumberConstructor, unknown, unknown, 0, boolean>;
             readonly vertical: BooleanConstructor;
@@ -6709,7 +6709,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
             readonly placement: import("element-plus/es/utils").EpPropFinalized<StringConstructor, import("@popperjs/core").Placement, unknown, "top", boolean>;
         }>> & {
             "onUpdate:modelValue"?: ((value: number) => any) | undefined;
-        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "modelValue" | "placement" | "vertical">;
+        } & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, "vertical" | "modelValue" | "placement">;
         $attrs: {
             [x: string]: unknown;
         };
@@ -9034,7 +9034,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             onMouseleave?: ((evt: MouseEvent) => any) | undefined;
                             onMouseenter?: ((evt: MouseEvent) => any) | undefined;
                         }>>;
-                        focusStartRef: Ref<HTMLElement | "first" | "container" | undefined>;
+                        focusStartRef: Ref<HTMLElement | "container" | "first" | undefined>;
                         trapped: Ref<boolean>;
                         onFocusAfterReleased: (event: CustomEvent<any>) => void;
                         onFocusAfterTrapped: () => void;
@@ -9096,7 +9096,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             trapped: BooleanConstructor;
                             focusTrapEl: import("vue").PropType<HTMLElement>;
                             focusStartEl: {
-                                type: import("vue").PropType<HTMLElement | "first" | "container">;
+                                type: import("vue").PropType<HTMLElement | "container" | "first">;
                                 default: string;
                             };
                         }, {
@@ -9106,7 +9106,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                             trapped: BooleanConstructor;
                             focusTrapEl: import("vue").PropType<HTMLElement>;
                             focusStartEl: {
-                                type: import("vue").PropType<HTMLElement | "first" | "container">;
+                                type: import("vue").PropType<HTMLElement | "container" | "first">;
                                 default: string;
                             };
                         }>> & {
@@ -9119,7 +9119,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         }, {
                             trapped: boolean;
                             loop: boolean;
-                            focusStartEl: HTMLElement | "first" | "container";
+                            focusStartEl: HTMLElement | "container" | "first";
                         }>;
                     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
                         mouseenter: (evt: MouseEvent) => boolean;
@@ -10043,9 +10043,9 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
             "update:modelValue": (value: number) => boolean;
         }, string, {
+            readonly vertical: boolean;
             readonly modelValue: number;
             readonly placement: import("element-plus/es/utils").EpPropMergeType<StringConstructor, import("@popperjs/core").Placement, unknown>;
-            readonly vertical: boolean;
         }> & {
             beforeCreate?: ((() => void) | (() => void)[]) | undefined;
             created?: ((() => void) | (() => void)[]) | undefined;
@@ -12377,7 +12377,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         onMouseleave?: ((evt: MouseEvent) => any) | undefined;
                         onMouseenter?: ((evt: MouseEvent) => any) | undefined;
                     }>>;
-                    focusStartRef: Ref<HTMLElement | "first" | "container" | undefined>;
+                    focusStartRef: Ref<HTMLElement | "container" | "first" | undefined>;
                     trapped: Ref<boolean>;
                     onFocusAfterReleased: (event: CustomEvent<any>) => void;
                     onFocusAfterTrapped: () => void;
@@ -12439,7 +12439,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         trapped: BooleanConstructor;
                         focusTrapEl: import("vue").PropType<HTMLElement>;
                         focusStartEl: {
-                            type: import("vue").PropType<HTMLElement | "first" | "container">;
+                            type: import("vue").PropType<HTMLElement | "container" | "first">;
                             default: string;
                         };
                     }, {
@@ -12449,7 +12449,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                         trapped: BooleanConstructor;
                         focusTrapEl: import("vue").PropType<HTMLElement>;
                         focusStartEl: {
-                            type: import("vue").PropType<HTMLElement | "first" | "container">;
+                            type: import("vue").PropType<HTMLElement | "container" | "first">;
                             default: string;
                         };
                     }>> & {
@@ -12462,7 +12462,7 @@ export declare const useSlide: (props: SliderProps, initData: SliderInitData, em
                     }, {
                         trapped: boolean;
                         loop: boolean;
-                        focusStartEl: HTMLElement | "first" | "container";
+                        focusStartEl: HTMLElement | "container" | "first";
                     }>;
                 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
                     mouseenter: (evt: MouseEvent) => boolean;

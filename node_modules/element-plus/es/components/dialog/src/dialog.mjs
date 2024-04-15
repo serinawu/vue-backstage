@@ -8,6 +8,10 @@ import { isBoolean } from '../../../utils/types.mjs';
 const dialogProps = buildProps({
   ...dialogContentProps,
   appendToBody: Boolean,
+  appendTo: {
+    type: definePropType(String),
+    default: "body"
+  },
   beforeClose: {
     type: definePropType(Function)
   },

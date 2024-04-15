@@ -12,6 +12,10 @@ var types = require('../../../utils/types.js');
 const dialogProps = runtime.buildProps({
   ...dialogContent.dialogContentProps,
   appendToBody: Boolean,
+  appendTo: {
+    type: runtime.definePropType(String),
+    default: "body"
+  },
   beforeClose: {
     type: runtime.definePropType(Function)
   },

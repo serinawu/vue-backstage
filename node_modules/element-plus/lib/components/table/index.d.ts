@@ -43,7 +43,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
     defaultExpandAll: BooleanConstructor;
     defaultSort: import("vue").PropType<import("./src/table/defaults").Sort | undefined>;
     tooltipEffect: StringConstructor;
-    tooltipOptions: import("vue").PropType<Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+    tooltipOptions: import("vue").PropType<Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
     spanMethod: import("vue").PropType<((data: {
         row: any;
         rowIndex: number;
@@ -85,12 +85,9 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
         type: import("vue").PropType<"auto" | "fixed">;
         default: string;
     };
-    scrollbarAlwaysOn: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    scrollbarAlwaysOn: BooleanConstructor;
     flexible: BooleanConstructor;
-    showOverflowTooltip: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+    showOverflowTooltip: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
 }, {
     ns: {
         namespace: import("vue").ComputedRef<string>;
@@ -223,7 +220,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
     defaultExpandAll: BooleanConstructor;
     defaultSort: import("vue").PropType<import("./src/table/defaults").Sort | undefined>;
     tooltipEffect: StringConstructor;
-    tooltipOptions: import("vue").PropType<Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+    tooltipOptions: import("vue").PropType<Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
     spanMethod: import("vue").PropType<((data: {
         row: any;
         rowIndex: number;
@@ -265,12 +262,9 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
         type: import("vue").PropType<"auto" | "fixed">;
         default: string;
     };
-    scrollbarAlwaysOn: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    scrollbarAlwaysOn: BooleanConstructor;
     flexible: BooleanConstructor;
-    showOverflowTooltip: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+    showOverflowTooltip: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
 }>> & {
     onSelect?: ((...args: any[]) => any) | undefined;
     "onExpand-change"?: ((...args: any[]) => any) | undefined;
@@ -293,8 +287,8 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
 }, {
     style: import("vue").CSSProperties;
     className: string;
-    border: boolean;
     tableLayout: "auto" | "fixed";
+    border: boolean;
     data: any[];
     fit: boolean;
     lazy: boolean;
@@ -350,7 +344,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
         align: StringConstructor;
         headerAlign: StringConstructor;
         showOverflowTooltip: {
-            type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+            type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
             default: undefined;
         };
         fixed: (BooleanConstructor | StringConstructor)[];
@@ -367,6 +361,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
             type: BooleanConstructor;
             default: boolean;
         };
+        filterClassName: StringConstructor;
         index: import("vue").PropType<number | ((index: number) => number)>;
         sortOrders: {
             type: import("vue").PropType<("ascending" | "descending" | null)[]>;
@@ -411,7 +406,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
         align: StringConstructor;
         headerAlign: StringConstructor;
         showOverflowTooltip: {
-            type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+            type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
             default: undefined;
         };
         fixed: (BooleanConstructor | StringConstructor)[];
@@ -428,6 +423,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
             type: BooleanConstructor;
             default: boolean;
         };
+        filterClassName: StringConstructor;
         index: import("vue").PropType<number | ((index: number) => number)>;
         sortOrders: {
             type: import("vue").PropType<("ascending" | "descending" | null)[]>;
@@ -438,7 +434,7 @@ export declare const ElTable: import("element-plus/es/utils").SFCWithInstall<imp
         type: string;
         width: string | number;
         minWidth: string | number;
-        showOverflowTooltip: boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined;
+        showOverflowTooltip: boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined;
         sortOrders: ("ascending" | "descending" | null)[];
         sortable: string | boolean;
         resizable: boolean;
@@ -485,7 +481,7 @@ export declare const ElTableColumn: import("element-plus/es/utils").SFCWithInsta
     align: StringConstructor;
     headerAlign: StringConstructor;
     showOverflowTooltip: {
-        type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+        type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
         default: undefined;
     };
     fixed: (BooleanConstructor | StringConstructor)[];
@@ -502,6 +498,7 @@ export declare const ElTableColumn: import("element-plus/es/utils").SFCWithInsta
         type: BooleanConstructor;
         default: boolean;
     };
+    filterClassName: StringConstructor;
     index: import("vue").PropType<number | ((index: number) => number)>;
     sortOrders: {
         type: import("vue").PropType<("ascending" | "descending" | null)[]>;
@@ -546,7 +543,7 @@ export declare const ElTableColumn: import("element-plus/es/utils").SFCWithInsta
     align: StringConstructor;
     headerAlign: StringConstructor;
     showOverflowTooltip: {
-        type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined>;
+        type: import("vue").PropType<boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined>;
         default: undefined;
     };
     fixed: (BooleanConstructor | StringConstructor)[];
@@ -563,6 +560,7 @@ export declare const ElTableColumn: import("element-plus/es/utils").SFCWithInsta
         type: BooleanConstructor;
         default: boolean;
     };
+    filterClassName: StringConstructor;
     index: import("vue").PropType<number | ((index: number) => number)>;
     sortOrders: {
         type: import("vue").PropType<("ascending" | "descending" | null)[]>;
@@ -573,7 +571,7 @@ export declare const ElTableColumn: import("element-plus/es/utils").SFCWithInsta
     type: string;
     width: string | number;
     minWidth: string | number;
-    showOverflowTooltip: boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "showArrow">> | undefined;
+    showOverflowTooltip: boolean | Partial<Pick<import("..").ElTooltipProps, "offset" | "effect" | "placement" | "popperClass" | "showAfter" | "hideAfter" | "popperOptions" | "enterable" | "appendTo" | "transition" | "showArrow">> | undefined;
     sortOrders: ("ascending" | "descending" | null)[];
     sortable: string | boolean;
     resizable: boolean;

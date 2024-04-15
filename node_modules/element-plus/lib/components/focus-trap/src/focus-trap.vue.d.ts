@@ -4,7 +4,7 @@ declare const _default: import("vue").DefineComponent<{
     trapped: BooleanConstructor;
     focusTrapEl: PropType<HTMLElement>;
     focusStartEl: {
-        type: PropType<HTMLElement | "first" | "container">;
+        type: PropType<HTMLElement | "container" | "first">;
         default: string;
     };
 }, {
@@ -14,7 +14,7 @@ declare const _default: import("vue").DefineComponent<{
     trapped: BooleanConstructor;
     focusTrapEl: PropType<HTMLElement>;
     focusStartEl: {
-        type: PropType<HTMLElement | "first" | "container">;
+        type: PropType<HTMLElement | "container" | "first">;
         default: string;
     };
 }>> & {
@@ -27,6 +27,6 @@ declare const _default: import("vue").DefineComponent<{
 }, {
     trapped: boolean;
     loop: boolean;
-    focusStartEl: HTMLElement | "first" | "container";
+    focusStartEl: HTMLElement | "container" | "first";
 }>;
 export default _default;

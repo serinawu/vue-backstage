@@ -55,6 +55,10 @@ const carouselProps = runtime.buildProps({
   pauseOnHover: {
     type: Boolean,
     default: true
+  },
+  motionBlur: {
+    type: Boolean,
+    default: false
   }
 });
 const carouselEmits = {
