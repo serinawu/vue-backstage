@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainLayout from '../src/views/Main.vue';
+import MainLayout from '@/views/Main.vue';
 
 const routes = [
     {
         path: '/login',
         name: 'loginPage',
-        component: () => import('../src/views/login/loginPage.vue'),
+        component: () => import('@/views/login/loginPage.vue'),
         meta: {title: "登入"},
     },
     { 
@@ -16,31 +16,31 @@ const routes = [
             {
                 path: 'home',
                 name: 'home',
-                component: () => import('../src/views/home/index.vue'),
+                component: () => import('@/views/home/index.vue'),
                 meta: {title: "首頁"}
                     
             },
             {
                 path: 'user',
                 name: 'user',
-                component: () => import('../src/views/user/index.vue'),
+                component: () => import('@/views/user/index.vue'),
                 meta: {title: "用戶管理"}
             },
             {
                 path: 'mall',
                 name: 'mall',
-                component: () => import('../src/views/mall/index.vue'),
+                component: () => import('@/views/mall/index.vue'),
                 meta: {title: "商品管理"}
             },
             {
                 path: 'page1',
                 name: 'page1',
-                component: () => import('../src/views/other/pageOne.vue')
+                component: () => import('@/views/other/pageOne.vue')
             },
             {
                 path: 'page2',
                 name: 'page2',
-                component: () => import('../src/views/other/pageTwo.vue')
+                component: () => import('@/views/other/pageTwo.vue')
             }
         ]
     }
