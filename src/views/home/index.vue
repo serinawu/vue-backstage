@@ -54,13 +54,13 @@
     </el-row>
 </template>
 <script>
-    import { getData } from '../../api/data.js';
+    import { getData } from '@/api/data.js';
     import * as echarts from 'echarts';
     export default {
         name: 'homePage',
         data() {
             return {
-                userImg: require('./../../assets/images/user.png'),
+                userImg: require('@/assets/images/user.png'),
                 tableData: [
                     {
                         name: 'oppo',

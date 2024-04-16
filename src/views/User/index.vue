@@ -75,7 +75,7 @@
 <script>
 import CommonForm from '@/components/CommonForm.vue';
 import CommonTable from '@/components/CommonTable.vue';
-import { getUser } from '../../api/data.js';
+import { getUser } from '@/api/data.js';
 export default {
     name: 'UserView',
     components: {

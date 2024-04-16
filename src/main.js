@@ -3,10 +3,10 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import './assets/less/index.less';
-import store from './store/index.js';
-import router from '../router';
+import store from '@/store/index.js';
+import router from '@/router';
 import axios from 'axios';
-import '../src/api/mock.js';
+import '@/api/mock.js';
 import App from './App.vue';
 
 router.beforeEach((to, from, next) => {
