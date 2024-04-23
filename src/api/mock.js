@@ -5,7 +5,7 @@ import userApi from './mockServeData/user.js';
 // 檢查環境變量 只有在開發環境使用模擬數據
 if (process.env.USE_MOCK_API === 'true') {
     //模擬 GET 請求
-    Mock.mock('/api/home/getData', homeApi.getStatisticalData);
+    Mock.mock('/home/getData', homeApi.getStatisticalData);
     Mock.mock(/user\/getUser/, 'get', userApi.getUserList);
 
     // 模擬POST 請求

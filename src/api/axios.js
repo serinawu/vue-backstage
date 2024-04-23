@@ -1,7 +1,13 @@
 import axios from 'axios';
 import config from '@/config/index.js';
 
-const baseUrl = process.env.USE_MOCK_API === 'true' ? config.baseUrl.dev : config.baseUrl.pro;
+let baseUrl = '';
+
+if (process.env.NODE_ENV === 'development') {
+    baseUrl = config.baseUrl.dev;
+} else {
+    baseUrl = config.baseUrl.pro;
+}
 
 class HttpRequest {
     constructor() {

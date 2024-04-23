@@ -6,7 +6,7 @@ import './assets/less/index.less';
 import store from '@/store/index.js';
 import router from '@/router';
 import axios from 'axios';
-import '@/api/mock.js';
+import './api/mock.js';
 import App from './App.vue';
 
 router.beforeEach((to, from, next) => {
@@ -31,6 +31,10 @@ router.afterEach((to) => {
 })
 
 store.commit('addMenu', router);
+
+if (process.env.NODE_ENV === 'development') {
+    require('./api/mock.js')
+  }
 
 const app = createApp(App);
 
