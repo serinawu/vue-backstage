@@ -203,17 +203,18 @@ export default {
                 page: this.config.page,
                 name
             }).then(({data: res}) => {
-                if (Array.isArray(res.list)) {
+                if (res && Array.isArray(res.list)) {
                     this.tableData = res.list.map(item => {
-                        item.sex = item.sex === 0 ? "女" : "男";
+                        item.sex = item.sex === 0 ? "女": "男";
                         return item;
                     });
                     this.config.total = res.count;
                 } else {
-                    // 如果res.list不是数组，可以设置tableData为空数组或进行其他错误处理
-                    this.tableData = [];
-                    console.error('Expected res.list to be an array but received:', res.list);
+                    throw new Error(`Expected res.list to be an array but received: ${typeof res.list}`);
                 }
+                this.config.loading = false;
+            }).catch(error => {
+                console.error('Error fetching data:', error);
                 this.config.loading = false;
             });
         },
