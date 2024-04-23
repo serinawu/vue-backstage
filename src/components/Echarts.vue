@@ -4,11 +4,8 @@
 <script>
 
 export default {
-    name: "CommonEcharts",
     props: {
-        isAxisChart: {
-            
-        }
+        isAxisChart
     }
 }
 </script>
