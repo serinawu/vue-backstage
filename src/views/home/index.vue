@@ -54,7 +54,6 @@
     </el-row>
 </template>
 <script>
-    import { getData } from '@/api/data.js';
     import * as echarts from 'echarts';
     export default {
         name: 'homePage',
@@ -140,21 +139,19 @@
             }
         },
         mounted() {
-            getData().then(res => {
-                const { code, data } = res.data;
+            fetch('/data/statistics.json')
+            .then(response => response.json())
+            .then(({ code, data }) => {
                 if (code === 20000) {
                     this.tableData = data.tableData;
                     const order = data.orderData;
                     const xData = order.date;
-                    const keyArray =  Object.keys(order.data[0]);
-                    const series = [];
-                    keyArray.forEach(key => {
-                        series.push({
-                            name: key,
-                            data: order.data.map(item => item[key]),
-                            type: 'line'
-                        })
-                    })
+                    const keyArray = Object.keys(order.data[0]);
+                    const series =  keyArray.map(key => ({
+                        name: key,
+                        data: order.data.map(item => item[key]),
+                        type: 'line'
+                    }));
                     const option = {
                         xAxis: {
                             data: xData,
@@ -164,92 +161,93 @@
                             data: keyArray
                         },
                         series
-                    }
-
+                    };
                     const E = echarts.init(this.$refs.echarts);
                     E.setOption(option);
+                }
 
-                    //用戶圖
-                    const userOption = {
-                        legend: {
-                            //圖例文字顏色
-                            textStyle: {
-                                color: "#333",
+                //用戶圖
+                const userOption = {
+                    legend: {
+                        //圖例文字顏色
+                        textStyle: {
+                            color: "#333",
+                        },
+                    },
+                    grid: {
+                        left: "20%"
+                    },
+                    //提示框
+                    tooltip: {
+                        trigger: 'axis',
+                    },
+                    xAxis: {
+                        type: "category", //類軸
+                        data: data.userData.map(item => item.date),
+                        axisLine: {
+                            lineStyle: {
+                                color: "#17b3a3",
                             },
                         },
-                        grid: {
-                            left: "20%",
+                        axisLabel: {
+                            interval: 0,
+                            color: '#333',
                         },
-                        //提示框
-                        tooltip: {
-                            trigger: "axis",
-                        },
-                        xAxis: {
-                            type: "category", //類軸
-                            data: data.userData.map(item => item.date),
+                    },
+                    yAxis: [
+                        {
+                            type: "value",
                             axisLine: {
                                 lineStyle: {
                                     color: "#17b3a3",
                                 },
                             },
-                            axisLabel: {
-                                interval: 0,
-                                color: '#333',
-                            },
                         },
-                        yAxis: [
-                            {
-                                type: "value",
-                                axisLine: {
-                                    lineStyle: {
-                                        color: '#17b3a3',
-                                    },
-                                },
-                            },
-                        ],
-                        color: ["#2ec7c9", "#b6a2de"],
-                        series: [
-                            {
-                                name: '新增用戶',
-                                data: data.userData.map(item => item.new),
-                                type: 'bar'
-                            },
-                            {
-                                name: '活躍用戶',
-                                data: data.userData.map(item => item.active),
-                                type: 'bar'
-                            }
-                        ],
-                    }
-                    const U = echarts.init(this.$refs.userEcharts);
-                    U.setOption(userOption);
-
-                    //圓餅圖
-                    const videoOption = {
-                        tooltip: {
-                            trigger: 'item',
+                    ],
+                    color: ["#2ec7c9", "#b6a2de"],
+                    series: [
+                        {
+                            name: '新增用戶',
+                            data: data.userData.map(item => item.new),
+                            type: 'bar'
                         },
-                        color: [
-                            "#0f78f4",
-                            "#dd536b",
-                            "#9462e5",
-                            "#a6a6a6",
-                            "#e1bb22",
-                            "#39c362",
-                            "#3ed1cf"
-                        ],
-                        series: [
-                            {
-                                data: data.videoData,
-                                type: "pie"
-                            }
-                        ],
-                    }
-                    const V = echarts.init(this.$refs.videoEcharts);
-                    V.setOption(videoOption);
+                        {
+                            name: '活躍用戶',
+                            data: data.userData.map(item => item.active),
+                            type: 'bar'
+                        }
+                    ],
                 }
-                console.log(res);
+                const U = echarts.init(this.$refs.userEcharts);
+                U.setOption(userOption);
+
+                //圓餅圖
+                const videoOption = {
+                    tooltip: {
+                        trigger: 'item',
+                    },
+                    color: [
+                        "#0f78f4",
+                        "#dd536b",
+                        "#9462e5",
+                        "#a6a6a6",
+                        "#e1bb22",
+                        "#39c362",
+                        "#3ed1cf"
+                    ],
+                    series: [
+                        {
+                            data: data.videoData,
+                            type: "pie"
+                        }
+                    ],
+                }
+                const V = echarts.init(this.$refs.videoEcharts);
+                V.setOption(videoOption);
             })
+            .catch(error => {
+                console.log('Error loading the data', error);
+            });
         }
     }
 </script>

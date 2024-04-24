@@ -34,21 +34,21 @@
                 <el-form-item label="性別" prop="sex">
                     <el-input v-model="operateForm.sex"></el-input>
                 </el-form-item>
-                <el-form-item label="年龄" prop="age">
-                    <el-input v-model="operateForm.age"></el-input>
-                </el-form-item>
                 <el-form-item label="出生日期" prop="birth">
                     <el-date-picker v-model="operateForm.birth"></el-date-picker>
                 </el-form-item>
-                <el-form-item label="地址" prop="addr">
-                    <el-input v-model="operateForm.addr"></el-input>
+                <el-form-item label="電話" prop="phone">
+                    <el-input v-model="operateForm.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="地址" prop="address">
+                    <el-input v-model="operateForm.address"></el-input>
                 </el-form-item>
             </el-form>
         </template>
         <span v-else>这是一段信息</span>
         <template #footer>
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false, confirm()">确 定</el-button>
+            <el-button type="primary" @click="dialogVisible = false, confirm()">確 定</el-button>
         </template>
         </el-dialog>
         <div class="manage-header">
@@ -75,7 +75,8 @@
 <script>
 import CommonForm from '@/components/CommonForm.vue';
 import CommonTable from '@/components/CommonTable.vue';
-import { getUser } from '@/api/data.js';
+import { getMockUser } from '@/api/data.js';
+import { formatDate, formatPhone } from '@/utils/formatHelpers';
 export default {
     name: 'UserView',
     components: {
@@ -88,24 +89,24 @@ export default {
             operateType: '',
             form: {
                 name: '',
-                birth: '',
-                age: '',
                 sex: '',
-                addr: '',
+                birth: '',
+                phone: '',
+                address: '',
             },
             operateForm: {
                 name: '',
-                birth: '',
-                age: '',
                 sex: '',
-                addr: '',
+                birth: '',
+                phone: '',
+                address: '',
             },
             rules: {
                 name: [{required: true, message: "請輸入姓名"}],
-                age: [{required: true, message: "請輸入年齡"}],
                 sex: [{required: true, message: "請選擇性別"}],
                 birth: [{required: true, message: "請選擇出生日期"}],
-                addr: [{required: true, message: "請輸入地址"}],
+                phone: [{required: true, message: "請輸入聯絡電話"}],
+                address: [{required: true, message: "請輸入地址"}],
             },
             formLabel: [
                 {
@@ -120,9 +121,9 @@ export default {
             tableData: [],
             tableLabel: [
                 {
-                    prop: "id",
-                    label: "id",
-                    width: 300
+                    prop: "createdAt",
+                    label: "帳號創建日期",
+                    width: 180
                 },
                 {
                     prop: "name",
@@ -138,18 +139,18 @@ export default {
                     width: 200
                 },
                 {
-                    prop: "age",
-                    label: "年齡"
+                    prop: "phone",
+                    label: "電話"
                 },
                 {
-                    prop: "addr",
+                    prop: "address",
                     label: "地址",
-                    width: 400
+                    width: 300
                 }
             ],
             config: {
                 page: 1,
-                total: 30
+                total: 10
             }
         };
     },
@@ -199,20 +200,24 @@ export default {
             console.log('Search keyword:', name);
             this.config.loading = true;
             name ? (this.config.page = 1) : '';
-            getUser({
+            getMockUser({
                 page: this.config.page,
                 name
-            }).then(({data: res}) => {
-                if (res && Array.isArray(res.list)) {
-                    this.tableData = res.list.map(item => {
-                        item.sex = item.sex === 0 ? "女": "男";
-                        return item;
-                    });
-                    this.config.total = res.count;
-                } else {
-                    throw new Error(`Expected res.list to be an array but received: ${typeof res.list}`);
-                }
-                this.config.loading = false;
+            }).then(response => {
+               const res = response.data;
+               if(res && Array.isArray(res)) {
+                this.tableData = res.map(item => {
+                    item.sex = item.sex === "female" ? "女" : "男";
+                    item.createdAt = formatDate(item.createdAt);
+                    item.birth = formatDate(item.birth);
+                    item.phone = formatPhone(item.phone);
+                 return item;
+                });
+                this.config.total = res.length;
+               } else {
+                throw new Error(`Expected res to be an array but received: ${typeof res}`);
+               }
+               this.config.loading = false;
             }).catch(error => {
                 console.error('Error fetching data:', error);
                 this.config.loading = false;
@@ -226,15 +231,15 @@ export default {
                         const url = this.operateType === 'edit' ? '/user/edit' : '/user/add';
                         const data = this.operateType === 'edit' ? this.operateForm : this.form;
                         this.$http.post(url, data)
-                            .then(() => {
-                                this.dialogVisible = false;
-                                this.getList();
-                                this.$message.success('操作成功');
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                this.$message.error('操作失敗');
-                            });
+                        .then(() => {
+                            this.dialogVisible = false;
+                            this.getList();
+                            this.$message.success('操作成功');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            this.$message.error('操作失敗');
+                        });
                     }
                 });
             }

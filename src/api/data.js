@@ -22,3 +22,13 @@ export const getUser = (params) => {
         params
     })
 }
+
+//mockAPI
+export const getMockUser = (params) => {
+    const url = 'https://662883b054afcabd0735ffcc.mockapi.io/api/user/user';
+    return axios.request({
+        url: url,
+        method: 'get',
+        params
+    });
+}
